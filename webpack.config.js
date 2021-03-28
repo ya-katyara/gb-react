@@ -11,6 +11,10 @@ module.exports = {
        filename: 'app.js',
        publicPath: '/static/',
    },
+   resolve: {
+    modules: [`${__dirname}/static_src`, 'node_modules'],
+    extensions: ['.js', '.jsx'],
+  },
    devtool: "source-map",
    devServer: {
     historyApiFallback: true,
@@ -25,7 +29,19 @@ module.exports = {
             exclude: /node_modules/,
             options: {
               presets: ['@babel/env', '@babel/react'],
+              plugins: [
+                [
+                    "@babel/plugin-proposal-class-properties",
+                    {
+                        "loose": true
+                    }
+                ]
+              ]
             }
+        },
+        {
+            test: /\.css$/i,
+            use: ["css-loader"],
         },
     ],
   },
