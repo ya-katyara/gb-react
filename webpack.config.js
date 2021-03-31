@@ -1,48 +1,41 @@
 const path = require("path");
-const webpack = require('webpack');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-   entry: {
-       app: './index.js',
-   },
-   context: path.resolve(__dirname, "static_src"),
-   output: {
-       path: path.resolve(__dirname, "static", "build"),
-       filename: 'app.js',
-       publicPath: '/static/',
-   },
-   resolve: {
+  entry: path.join(__dirname, "static_src", "index.js"),
+  output: {
+    path: path.join(__dirname, "static", "build"),
+    filename: "bundle.js",
+  },
+  resolve: {
     modules: [`${__dirname}/static_src`, 'node_modules'],
     extensions: ['.js', '.jsx'],
   },
-   devtool: "source-map",
-   devServer: {
-    historyApiFallback: true,
-    contentBase: path.resolve(__dirname, "static"),
-  },
+  devtool: 'source-map',
   module: {
     rules: [
-        {
-            test: /\.(js|jsx)$/,
-            include: path.resolve(__dirname, "static_src"),
-            loader: 'babel-loader',
-            exclude: /node_modules/,
-            options: {
-              presets: ['@babel/env', '@babel/react'],
-              plugins: [
-                [
-                    "@babel/plugin-proposal-class-properties",
-                    {
-                        "loose": true
-                    }
-                ]
-              ]
-            }
+      {
+        test: /.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
         },
-        {
-            test: /\.css$/i,
-            use: ["css-loader"],
-        },
+      },
+      {
+        test: /.(css|scss)$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+      },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: path.join(__dirname, "static_src", "index.html"),
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css",
+    }),
+  ],
 };

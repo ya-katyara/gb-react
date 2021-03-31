@@ -1,0 +1,48 @@
+.card {
+  width: 285px;
+  margin-bottom: 10px;
+  position: relative;
+  overflow: visible!important;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -10px;
+    bottom: 10px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right:10px solid #fff;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -11px;
+    bottom: 8px;
+    border-top: 11px solid transparent;
+    border-bottom: 11px solid transparent;
+    border-right: 11px solid rgb(0 0 0 / 20%);
+  }
+  &.right {
+    margin: 0 0 10px auto;
+    &::before {
+      right: -10px;
+      left: auto;
+      border-right: none;
+      border-top: 11px solid transparent;
+      border-bottom: 11px solid transparent;
+      border-left: 11px solid rgb(0 0 0 / 20%);
+    }
+    &::after {
+      right: -10px;
+      left: auto;
+      border-right: none;
+      border-top: 11px solid transparent;
+      border-bottom: 11px solid transparent;
+      border-left: 11px solid #fff;
+    }
+  }
+}
+

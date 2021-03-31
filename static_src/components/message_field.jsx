@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Message from './message';
+import Message from './message/message';
 import MessageSend from './message_send';
 
 const MessageField = () => {
