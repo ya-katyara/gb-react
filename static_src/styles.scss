@@ -1,0 +1,18 @@
+body {
+  background-color: #b0d8e7;
+  margin: 0;
+}
+.container {
+  background: #dbe5f3;
+  box-shadow: inset 0px 0px 3px 1px #eee;
+  padding: 20px 20px 5px;
+  height: 100%;
+  box-sizing: border-box;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+.sidebar {
+  background: #fff;
+}
