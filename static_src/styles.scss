@@ -1,6 +1,11 @@
+a {
+  text-decoration: none;
+  color: inherit;
+}
 body {
   background-color: #b0d8e7;
   margin: 0;
+  font-family: Roboto;
 }
 .container {
   background: #dbe5f3;
@@ -12,7 +17,11 @@ body {
 .flex {
   display: flex;
   justify-content: space-between;
+  &-column {
+    flex-direction: column;
+  }
 }
 .sidebar {
   background: #fff;
+  position: relative;
 }

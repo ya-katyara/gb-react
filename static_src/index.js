@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Layout from './containers/layout';
+import App from './containers/app';
 import "./styles.scss";
 
 ReactDOM.render(
-   <Layout />,
+   <App />,
    document.getElementById('root')
 );
