@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import TextField from '@material-ui/core/TextField';
+import { AUTHORS } from '../utils/constants';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -26,7 +27,7 @@ const MessageSend = ({addMessage}) => {
     e.preventDefault();
     addMessage({
       text: message,
-      author: 'user'
+      author: AUTHORS.me
     });
     setMessage('');
   }

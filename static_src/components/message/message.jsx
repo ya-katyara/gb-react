@@ -7,11 +7,12 @@ import Avatar from '@material-ui/core/Avatar';
 
 import styles from './styles.module.scss';
 import cn from 'classnames';
+import { AUTHORS } from '../../utils/constants';
 
 const Message = ({message}) => {
 
   return <>
-          <Card className={cn(styles.card, {[styles.right]: message.author === "user"})}>
+          <Card className={cn(styles.card, {[styles.right]: message.author === AUTHORS.me})}>
           <CardHeader
             avatar={
               <Avatar>

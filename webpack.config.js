@@ -7,12 +7,16 @@ module.exports = {
   output: {
     path: path.join(__dirname, "static", "build"),
     filename: "bundle.js",
+    publicPath: "/"
   },
   resolve: {
     modules: [`${__dirname}/static_src`, 'node_modules'],
     extensions: ['.js', '.jsx'],
   },
   devtool: 'source-map',
+  devServer: {
+    historyApiFallback: true
+ },
   module: {
     rules: [
       {

@@ -1,45 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Message from './message/message';
 import MessageSend from './message_send';
+import { AUTHORS } from '../utils/constants';
 
-const MessageField = () => {
-  const [messages, setMessages] = useState([
-    {
-      text: 'Hello',
-      author: 'bot'
-    },
-    {
-      text: "How's it goin'?",
-      author: 'bot'
-    }
-  ]);
+const MessageField = ({messages, handleAddMessage}) => {
 
   useEffect(() => {
-    const lastMessage = messages[messages.length-1];
-    let timeout;
-    if (lastMessage.author === 'user') {
-      const message = {
-        text: 'u sure?',
-        author: 'bot'
+    if (messages.length) {
+      const lastMessage = messages[messages.length-1];
+      
+      let timeout;
+      if (lastMessage.author === AUTHORS.me) {
+        const message = {
+          text: 'u sure?'
+        }
+        timeout = setTimeout(() => handleAddMessage(message), 1500);
       }
-      timeout = setTimeout(() => addMessage(message), 1500);
-    }
+      
 
-    return () => clearTimeout(timeout);
+      return () => clearTimeout(timeout);
+    }
   }, [messages]);
 
-  const addMessage = (message) => {
-    setMessages(prevState => {
-      return [
-        ...prevState,
-        message
-      ]
-    })
-  }
-
   return <>
-    {messages.map((message, idx) => <Message key={idx} message={ message } />)}
-    <MessageSend addMessage={addMessage} />
+    <div className="messages">
+      {messages.length > 0 && messages.map((message) => <Message key={message.id} message={ message } />)}
+      {messages.length === 0 && <div>No messages in this chat yet</div>}
+    </div>
+    <div className="text_wrapper">
+      <MessageSend addMessage={handleAddMessage} />
+    </div>
   </>;
 };
 
