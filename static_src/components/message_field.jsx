@@ -2,8 +2,13 @@ import React, { useEffect } from 'react';
 import Message from './message/message';
 import MessageSend from './message_send';
 import { AUTHORS } from '../utils/constants';
+import { addMessage } from '../store/chats/actions';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router';
 
-const MessageField = ({messages, handleAddMessage}) => {
+const MessageField = ({messages}) => {
+  const dispatch = useDispatch();
+  const {chatId} = useParams();
 
   useEffect(() => {
     if (messages.length) {
@@ -21,6 +26,14 @@ const MessageField = ({messages, handleAddMessage}) => {
       return () => clearTimeout(timeout);
     }
   }, [messages]);
+
+  
+  const handleAddMessage = (message) => {
+    dispatch(addMessage({
+      chatId,
+      message
+    }))
+  };
 
   return <>
     <div className="messages">
