@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,9 +10,13 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    flexGrow: 1,
+  },
+  grow: {
     flexGrow: 1,
   },
   menuButton: {
@@ -22,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const userName = useSelector(state => state.profile.name);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -51,6 +57,18 @@ const Header = () => {
         <Typography variant="h6" color="inherit">
           ChatRoom
         </Typography>
+        <div className={classes.grow} />
+          <div>
+            <IconButton
+              edge="end"
+              aria-label="account of current user"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            { userName }
+          </div>
       </Toolbar>
     </AppBar>
   </>
