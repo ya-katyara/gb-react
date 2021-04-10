@@ -1,10 +1,11 @@
-import { ADD_CHAT, ADD_MESSAGE } from './types';
+import { ADD_CHAT, ADD_MESSAGE, SET_NOTIFICATION, DELETE_MESSAGE, DELETE_CHAT } from './types';
 import { AUTHORS } from '../../utils/constants';
 
 const initialState = {
   chat1: {
     id: 1,
     user: AUTHORS.bot,
+    isNewMessage: false,
     messages: [
         {
           id: 1,
@@ -20,6 +21,7 @@ const initialState = {
   },
   chat2: {
     id: 2,
+    isNewMessage: false,
     user: AUTHORS.alex_bot,
     messages: [
         {
@@ -36,6 +38,7 @@ const initialState = {
   },
   chat3: {
     id: 3,
+    isNewMessage: false,
     user: AUTHORS.billy_bot,
     messages: [
         {
@@ -64,6 +67,16 @@ export const chatsReducer = (state = initialState, action) => {
         }
       }
     }
+    case SET_NOTIFICATION: {
+      const {chatId, isNewMessage} = action.payload;
+      return {
+        ...state,
+        [`chat${chatId}`]: {
+          ...state[`chat${chatId}`],
+          isNewMessage
+        }
+      }
+    }
     case ADD_MESSAGE: {
       const message = action.payload.message;
       const key = `chat${action.payload.chatId}`;
@@ -82,6 +95,25 @@ export const chatsReducer = (state = initialState, action) => {
           }],
         }
       }
+    }
+    case DELETE_MESSAGE: {
+      const {chatId, messageId} = action.payload;
+      const key = `chat${chatId}`;
+      const chat = state[key];
+      return {
+        ...state,
+        [key]: {
+          ...chat,
+          messages: [...chat.messages.filter(item => item.id != messageId)]
+        }
+      }
+    }
+    case DELETE_CHAT: {
+      const chatId = action.payload;
+      const key = `chat${chatId}`;
+      const newChats = {...state};
+      delete newChats[key];
+      return newChats;
     }
     default:
       return state;
