@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Message from './message/message';
 import MessageSend from './message_send';
-import { AUTHORS } from '../utils/constants';
-import { addMessage } from '../store/chats/actions';
+import { addMessageWithResponse } from '../store/chats/actions';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 
@@ -10,26 +9,8 @@ const MessageField = ({messages}) => {
   const dispatch = useDispatch();
   const {chatId} = useParams();
 
-  useEffect(() => {
-    if (messages.length) {
-      const lastMessage = messages[messages.length-1];
-      
-      let timeout;
-      if (lastMessage.author === AUTHORS.me) {
-        const message = {
-          text: 'u sure?'
-        }
-        timeout = setTimeout(() => handleAddMessage(message), 1500);
-      }
-      
-
-      return () => clearTimeout(timeout);
-    }
-  }, [messages]);
-
-  
   const handleAddMessage = (message) => {
-    dispatch(addMessage({
+    dispatch(addMessageWithResponse({
       chatId,
       message
     }))

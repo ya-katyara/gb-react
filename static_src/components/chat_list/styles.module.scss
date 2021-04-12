@@ -1,0 +1,26 @@
+@keyframes blinking {
+  0% {
+    background-color: #ff3d50;
+  }
+  /* YOU CAN ADD MORE COLORS IN THE KEYFRAMES IF YOU WANT
+  50% {
+    background-color: #55d66b;
+    border: 5px solid #126620;
+  }
+  */
+  100% {
+    background-color: #222291;
+  }
+}
+.blinking {
+  /* NAME | TIME | ITERATION */
+  animation: blinking 1s infinite;
+}
+
+.delete_btn {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  color: rgb(0 0 0 / 38%);
+  cursor: pointer;
+}
