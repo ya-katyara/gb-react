@@ -1,0 +1,53 @@
+{
+  "chat1": {
+    "id": 1,
+    "user": "Bot",
+    "isNewMessage": false,
+    "messages": [
+      {
+          "id": 1,
+          "text": "Hello",
+          "author": "Bot"
+      },
+      {
+          "id": 2,
+          "text": "My dear friend!",
+          "author": "Bot"
+      }
+    ]
+  },
+  "chat2": {
+    "id": 2,
+    "isNewMessage": false,
+    "user": "Alex Bot",
+    "messages": [
+      {
+          "id": 1,
+          "text": "Hello",
+          "author": "Alex Bot"
+      },
+      {
+          "id": 2,
+          "text": "How's it goin'?",
+          "author": "Alex Bot"
+      }
+    ]
+  },
+  "chat3": {
+    "id": 3,
+    "isNewMessage": false,
+    "user": "Billy Bot",
+    "messages": [
+      {
+          "id": 1,
+          "text": "Sup?",
+          "author": "Billy Bot"
+      },
+      {
+          "id": 2,
+          "text": "Doin' alright!",
+          "author": "Me"
+      }
+    ]
+  }
+}
