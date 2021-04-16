@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 
@@ -11,7 +11,7 @@ import MessageField from '../components/message_field';
 import ChatList from '../components/chat_list/chat_list';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addChat } from '../store/chats/actions';
+import { addChat, getChats } from '../store/chats/actions';
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -27,11 +27,15 @@ const Layout = () => {
   const history = useHistory();
   const {chatId} = useParams();
 
-  const chats = useSelector(state => state.chats);
+  const chats = useSelector(state => state.chats.chats_list);
 
   if (chatId && !chats[`chat${chatId}`]) {
     history.replace('/chat');
   }
+
+  useEffect(() => {
+    dispatch(getChats());
+  }, []);
 
   const handleAddChat = () => {
     const chat = {
