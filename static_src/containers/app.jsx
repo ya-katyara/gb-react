@@ -4,11 +4,13 @@ import Container from '@material-ui/core/Container';
 import Header from './header';
 import Layout from './layout';
 import Profile from '../components/profile';
+import InstallPopup from '../components/popup_install';
 
 const App = () => {
   return <>
     <BrowserRouter>
       <Header />
+      <InstallPopup />
       <Container>
         <Switch>
           <Route exact path="/chat">

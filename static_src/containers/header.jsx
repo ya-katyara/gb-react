@@ -11,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import PushToggle from '../components/popup_toggle';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,6 +59,9 @@ const Header = () => {
           ChatRoom
         </Typography>
         <div className={classes.grow} />
+          <div>
+            <PushToggle />
+          </div>
           <div>
             <IconButton
               edge="end"

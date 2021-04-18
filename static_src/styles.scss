@@ -25,3 +25,8 @@ body {
   background: #fff;
   position: relative;
 }
+.messages {
+  max-height: 83vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

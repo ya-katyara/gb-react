@@ -33,9 +33,9 @@ const Layout = () => {
     history.replace('/chat');
   }
 
-  useEffect(() => {
-    dispatch(getChats());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getChats());
+  // }, []);
 
   const handleAddChat = () => {
     const chat = {
@@ -47,13 +47,13 @@ const Layout = () => {
   }
 
   return <Grid container spacing={0}>
-          <Grid item xs={3} className="sidebar">
+          <Grid item xs={12} md={3} className="sidebar">
             <ChatList chats={Object.values(chats)} />
             <Fab color="primary" aria-label="add" className={classes.fab} onClick={handleAddChat}>
               <AddIcon />
             </Fab>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={12} md={9}>
             { chatId && chats[`chat${chatId}`] && 
             <div className="container flex flex-column">
               <MessageField messages={chats[`chat${chatId}`].messages} />

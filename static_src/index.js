@@ -8,9 +8,9 @@ import "./styles.scss";
 
 ReactDOM.render(
    <Provider store={store}>
-      {/* <PersistGate loading={<span>Loading</span>} persistor={persistor}> */}
+      <PersistGate loading={<span>Loading</span>} persistor={persistor}>
          <App />
-      {/* </PersistGate> */}
+      </PersistGate>
    </Provider>,
    document.getElementById('root')
 );
