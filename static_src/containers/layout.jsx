@@ -11,7 +11,8 @@ import MessageField from '../components/message_field';
 import ChatList from '../components/chat_list/chat_list';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addChat, getChats } from '../store/chats/actions';
+import { addChat } from '../store/chats/actions';
+import { db } from '../services/firebase';
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -33,9 +34,22 @@ const Layout = () => {
     history.replace('/chat');
   }
 
-  // useEffect(() => {
-  //   dispatch(getChats());
-  // }, []);
+  useEffect(() => {
+    window.addEventListener('appinstalled', () => {
+      saveInstalls();
+    });
+  }, []);
+
+  const saveInstalls = async () => {
+    try {
+      await db.ref("installs").push({
+        '1': '1'
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
 
   const handleAddChat = () => {
     const chat = {

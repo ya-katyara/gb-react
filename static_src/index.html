@@ -7,7 +7,6 @@
    <title>React</title>
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-   <script src="/static_src/notifications.js"></script>
    <link rel="manifest" href="/manifest/manifest.json">
 </head>
 <body>
@@ -28,12 +27,6 @@
    } else {
        console.log('ServiceWorker не поддерживается');
    }
-   window.addEventListener('appinstalled', (evt) => {
-      fetch('', {
-          method: 'GET',
-          credentials: 'include',
-        });
-   });
 
 </script>
 </body>
