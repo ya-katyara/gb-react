@@ -11,6 +11,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import PushToggle from '../components/popup_toggle';
+
+const appServerKey = 'BD6_Zv9VIvWTtPUppd076WvBF6yPj8mhwvtCdtWNaxvYV-uSnv9CiqCMzpsdunY-DluV0FeLkIRRGF13nztCPFk';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +40,29 @@ const Header = () => {
     setAnchorEl(null);
   };
 
+  const handlePushSubscribe = () => {
+    navigator.serviceWorker.ready.then(function(registration) {
+      if (!registration.pushManager) {
+        alert('push-уведомления не поддерживаются вашим браузером.');
+        return false;
+      }
+   
+      // Подписываемся
+      registration.pushManager.subscribe({
+        userVisibleOnly: true, // Всегда показывать уведомления
+        applicationServerKey: appServerKey
+      })
+      .then(function (subscription) {
+        alert('Успешно подписаны.');
+        console.info('Подписаны на push-уведомления.');
+        console.log(subscription);
+      })
+      .catch(function (error) {
+        console.error('Ошибка подписки на push-уведомления: ', error);
+      });
+    })
+  }
+
   return <>
     <Menu
       id="simple-menu"
@@ -58,6 +84,9 @@ const Header = () => {
           ChatRoom
         </Typography>
         <div className={classes.grow} />
+          <div>
+            <PushToggle handleClick={handlePushSubscribe} />
+          </div>
           <div>
             <IconButton
               edge="end"

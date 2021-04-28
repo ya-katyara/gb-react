@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { deleteMessage } from '../../store/chats/actions';
@@ -18,11 +18,17 @@ import { AUTHORS } from '../../utils/constants';
 const Message = ({message}) => {
   const dispatch = useDispatch();
   const {chatId} = useParams();
+  const messageWrap = useRef();
+
+  useEffect(() => {
+    messageWrap.current.scrollIntoView();
+  }, []);
+
   const handleDelete = () => {
     dispatch(deleteMessage({chatId: chatId, messageId: message.id}));
   }
   return <>
-          <Card className={cn(styles.card, {[styles.right]: message.author === AUTHORS.me})}>
+          <Card className={cn(styles.card, {[styles.right]: message.author === AUTHORS.me})} ref={messageWrap}>
           <CardHeader
             avatar={
               <Avatar>

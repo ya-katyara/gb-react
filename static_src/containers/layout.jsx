@@ -11,7 +11,8 @@ import MessageField from '../components/message_field';
 import ChatList from '../components/chat_list/chat_list';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addChat, getChats } from '../store/chats/actions';
+import { addChat } from '../store/chats/actions';
+import { db } from '../services/firebase';
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -34,8 +35,21 @@ const Layout = () => {
   }
 
   useEffect(() => {
-    dispatch(getChats());
+    window.addEventListener('appinstalled', () => {
+      saveInstalls();
+    });
   }, []);
+
+  const saveInstalls = async () => {
+    try {
+      await db.ref("installs").push({
+        '1': '1'
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
 
   const handleAddChat = () => {
     const chat = {
@@ -47,13 +61,13 @@ const Layout = () => {
   }
 
   return <Grid container spacing={0}>
-          <Grid item xs={3} className="sidebar">
+          <Grid item xs={12} md={3} className="sidebar">
             <ChatList chats={Object.values(chats)} />
             <Fab color="primary" aria-label="add" className={classes.fab} onClick={handleAddChat}>
               <AddIcon />
             </Fab>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={12} md={9}>
             { chatId && chats[`chat${chatId}`] && 
             <div className="container flex flex-column">
               <MessageField messages={chats[`chat${chatId}`].messages} />
